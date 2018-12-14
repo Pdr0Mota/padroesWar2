@@ -16,8 +16,9 @@ public class MainScreen extends JFrame {
 	
 	public MainScreen() {
 		super("War");
-		setSize(200,100);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		setSize(236,144);
 		setUp();
 		setVisible(true);
 		
@@ -31,31 +32,34 @@ public class MainScreen extends JFrame {
 		JPanel painelNorte = new JPanel();
 		p.add(painelNorte, BorderLayout.NORTH);
 		
-		JPanel painelOeste = new JPanel();
-		p.add(painelOeste, BorderLayout.WEST);
-		JPanel painelLeste = new JPanel();
-		p.add(painelLeste, BorderLayout.EAST);
+		painelNorte.add(new JLabel("Escolha o Jogo."));
+		
+		JPanel panel = new JPanel();
+		p.add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
 		
 		JButton b1 = new JButton("War 1");
+		b1.setBounds(62, 11, 97, 23);
+		panel.add(b1);
 		JButton b2 = new JButton("War 2");
-		
-		painelNorte.add(new JLabel("Escolha o Jogo."));		
-		painelOeste.add(b1);
-		painelLeste.add(b2);
-		
-		b1.addActionListener(new ActionListener() {			 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(null, "War 1");
-			}
-			});
+		b2.setBounds(62, 40, 97, 23);
+		panel.add(b2);
 		
 		b2.addActionListener(new ActionListener() {			 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				JOptionPane.showMessageDialog(null, "War 2");
+			}
+			});
+		
+		b1.addActionListener(new ActionListener() {			 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				War1Main w1 = new War1Main();
+				w1.setVisible(true);
+				dispose();
 			}
 			});
 	}
