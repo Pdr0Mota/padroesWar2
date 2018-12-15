@@ -12,9 +12,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class MainScreen extends JFrame {
+import Controller.War1;
+import Controller.War2;
+
+public class GameSelectionScreen extends JFrame {
 	
-	public MainScreen() {
+	public GameSelectionScreen() {
 		super("War");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -50,6 +53,10 @@ public class MainScreen extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				JOptionPane.showMessageDialog(null, "War 2");
+				PlayerNumberSelection w2 = new PlayerNumberSelection(new War2());
+				w2.setVisible(true);
+				dispose();
+			
 			}
 			});
 		
@@ -57,13 +64,11 @@ public class MainScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				War1Main w1 = new War1Main();
+				PlayerNumberSelection w1 = new PlayerNumberSelection(new War1());
 				w1.setVisible(true);
 				dispose();
 			}
 			});
 	}
-	
-	
-	
+		
 }
