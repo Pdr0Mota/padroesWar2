@@ -65,6 +65,8 @@ public class PlayerNumberSelection extends JFrame {
 					
 				int numberOfPlayers = (Integer) spinner.getValue();
 				JOptionPane.showMessageDialog(null, numberOfPlayers);
+				g.setPlayers(numberOfPlayers);
+			
 			}
 		});
 		btnNewButton_1.setBounds(52, 43, 114, 23);
