@@ -20,6 +20,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Canvas;
+import java.awt.Color;
 
 public class PlayerNumberSelection extends JFrame {
 
@@ -28,9 +30,8 @@ public class PlayerNumberSelection extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PlayerNumberSelection(Game g) {
-		super(g.getVersion());
-		Game currentGame = g;
+	
+	public PlayerNumberSelection() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 318, 115);
@@ -39,7 +40,7 @@ public class PlayerNumberSelection extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Escolha o N\u00FAmero de Jogadores");
+		JLabel lblNewLabel = new JLabel("Escolha o Numero de Jogadores");
 		lblNewLabel.setBounds(10, 11, 191, 21);
 		contentPane.add(lblNewLabel);
 		
@@ -56,20 +57,19 @@ public class PlayerNumberSelection extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(176, 43, 89, 23);
+		btnNewButton.setBounds(52, 43, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Confirmar");
 		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-					
+			public void actionPerformed(ActionEvent arg0) {				
 				int numberOfPlayers = (Integer) spinner.getValue();
-				JOptionPane.showMessageDialog(null, numberOfPlayers);
-				g.setPlayers(numberOfPlayers);
-			
+				ColorPlayerScreen cps = new ColorPlayerScreen(numberOfPlayers);
+				cps.setVisible(true);
+				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(52, 43, 114, 23);
+		btnNewButton_1.setBounds(151, 43, 114, 23);
 		contentPane.add(btnNewButton_1);
 	}
 }

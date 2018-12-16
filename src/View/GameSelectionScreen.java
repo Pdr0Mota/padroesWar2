@@ -52,11 +52,9 @@ public class GameSelectionScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(null, "War 2");
-				PlayerNumberSelection w2 = new PlayerNumberSelection(new War2());
+				PlayerNumberSelection w2 = new PlayerNumberSelection();
 				w2.setVisible(true);
-				dispose();
-			
+				dispose();			
 			}
 			});
 		
@@ -64,7 +62,7 @@ public class GameSelectionScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				PlayerNumberSelection w1 = new PlayerNumberSelection(new War1());
+				PlayerNumberSelection w1 = new PlayerNumberSelection();
 				w1.setVisible(true);
 				dispose();
 			}
