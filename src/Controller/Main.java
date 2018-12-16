@@ -10,7 +10,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		Game Jogo = new Game();
+		Jogo Jogo = new Jogo();
 		Jogo.criarMapa();                
 		Jogo.initBaralho();
 //		Jogo.printaBaralho();

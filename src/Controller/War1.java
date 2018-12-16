@@ -1,5 +1,5 @@
 package controller;
 
-public interface Game {
+public class War1 {
 
 }

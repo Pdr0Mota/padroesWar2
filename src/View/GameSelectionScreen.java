@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Controller.War1;
-import Controller.War2;
+import controller.War1;
+import controller.War2;
 
 public class GameSelectionScreen extends JFrame {
 	
