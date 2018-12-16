@@ -1,5 +1,5 @@
 package controller;
 
-public class War1 {
+public class War1 implements Game {
 
 }
