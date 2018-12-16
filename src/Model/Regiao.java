@@ -1,39 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Model;
+package model;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Nilson Augusto
- */
 public class Regiao {
-    private String nome;
-    private ArrayList<Estado> estados;
+	private String Nome;
+	private ArrayList<Estado> Estados;
+	
+	public Regiao(String nome) {
+		Nome = nome;
+		Estados = new ArrayList();
+	}
+	
+	public String getNome() {
+		return Nome;
+	}
+	
+	public ArrayList<Estado> getEstados() {
+		return Estados;
+	}
 
-    public Regiao(String nome) {
-        this.nome = nome;
-        this.estados = new ArrayList<Estado>();
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public ArrayList<Estado> getEstados() {
-        return estados;
-    }
-
-    public void setEstados(ArrayList<Estado> estados) {
-        this.estados = estados;
-    }       
-    
+	public void addEstados(Estado estado) {
+		Estados.add(estado);
+	}
+	
+	public Jogador getDomintante() {
+		Jogador dominante = Estados.get(0).getDominante();
+		for (int i = 1; i < Estados.size(); i++) {
+			if (!(Estados.get(i).getDominante().equals(dominante))) {
+				return null;
+			}			
+		}
+		return dominante;
+	}
+	
 }

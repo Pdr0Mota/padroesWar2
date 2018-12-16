@@ -45,21 +45,21 @@ public class MainGame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(264, 11, 89, 23);
+		btnNewButton.setBounds(130, 140, 89, 23);
 		panel.add(btnNewButton);
 		
 		JButton btnMover = new JButton("Mover");
-		btnMover.setBounds(264, 45, 89, 23);
+		btnMover.setBounds(130, 174, 89, 23);
 		panel.add(btnMover);
 		
 		JButton btnEncerrar = new JButton("Encerrar");
-		btnEncerrar.setBounds(264, 79, 89, 23);
+		btnEncerrar.setBounds(130, 208, 89, 23);
 		panel.add(btnEncerrar);
 		
 		JPanel panel_mapa = new JPanel();
 		panel_mapa.setBounds(388, 0, 440, 497);
 		panel.add(panel_mapa);
-		panel_mapa.add(map);
+		
 		
 		JButton btnMapa = new JButton("Mapa");
 		btnMapa.addActionListener(new ActionListener() {
@@ -67,6 +67,7 @@ public class MainGame extends JFrame {
 				
 				if(map.isVisible()==false) 
 				{
+					panel_mapa.add(map);
 					map.setVisible(true);
 				}
 				else 

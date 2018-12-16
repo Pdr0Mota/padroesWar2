@@ -1,28 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Model;
+package model;
 
-/**
- *
- * @author Nilson Augusto
- */
 public class Forma {
-    private String forma;
+	private String TipoForma;
 
-    public Forma(String forma) {
-        this.forma = forma;
-    }
+	public String getTipoForma() {
+		return TipoForma;
+	}
 
-    public String getForma() {
-        return forma;
-    }
+	public void setTipoForma(String tipoForma) {
+		TipoForma = tipoForma;
+	}
 
-    public void setForma(String forma) {
-        this.forma = forma;
-    }
-    
-    
 }
