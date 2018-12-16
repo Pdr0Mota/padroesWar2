@@ -24,19 +24,17 @@ public class MainGame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainGame() {
+		
+		Mapa map = new Mapa();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 844, 571);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel("");
-		contentPane.add(lblNewLabel, BorderLayout.WEST);
 		java.awt.Image img = new ImageIcon(this.getClass().getResource("/Brasil1988.jpg")).getImage();
 		img = img.getScaledInstance(400, 400,  java.awt.Image.SCALE_SMOOTH);
-		lblNewLabel.setIcon(new ImageIcon(img));
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -57,6 +55,30 @@ public class MainGame extends JFrame {
 		JButton btnEncerrar = new JButton("Encerrar");
 		btnEncerrar.setBounds(264, 79, 89, 23);
 		panel.add(btnEncerrar);
+		
+		JPanel panel_mapa = new JPanel();
+		panel_mapa.setBounds(388, 0, 440, 497);
+		panel.add(panel_mapa);
+		panel_mapa.add(map);
+		
+		JButton btnMapa = new JButton("Mapa");
+		btnMapa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(map.isVisible()==false) 
+				{
+					map.setVisible(true);
+				}
+				else 
+				{
+					map.dispose();
+				}
+			}
+		});
+		btnMapa.setBounds(130, 386, 89, 23);
+		panel.add(btnMapa);
+		
+		
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
