@@ -10,11 +10,17 @@ import javax.swing.border.EmptyBorder;
 
 import com.sun.prism.Image;
 
+import model.Estado;
+import model.Regiao;
+import model.Tabuleiro;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class MainGame extends JFrame {
 
@@ -23,7 +29,7 @@ public class MainGame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainGame() {
+	public MainGame(Tabuleiro tabs) {
 		
 		Mapa map = new Mapa();
 		setResizable(false);
@@ -59,6 +65,22 @@ public class MainGame extends JFrame {
 		JPanel panel_mapa = new JPanel();
 		panel_mapa.setBounds(388, 0, 440, 497);
 		panel.add(panel_mapa);
+		
+		
+		ArrayList<Regiao> regioesAux = tabs.getRegioes();
+		ArrayList<Estado> estadosAux;
+		for(int i =0;i < regioesAux.size();i++) 
+		{
+			estadosAux=regioesAux.get(i).getEstados();
+			for(int j=0;j< estadosAux.size();j++) 
+			{
+				JButton stateBtn = new JButton(estadosAux.get(j).getNome());
+				
+				panel_mapa.add(stateBtn);
+				
+			}
+		}
+		
 		
 		
 		JButton btnMapa = new JButton("Mapa");

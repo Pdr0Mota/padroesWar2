@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import controller.Jogo;
 
 public class ColorPlayerScreen extends JFrame {
 
@@ -79,7 +80,9 @@ public class ColorPlayerScreen extends JFrame {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainGame mg = new MainGame();
+				Jogo novo = new Jogo();
+				novo.criarMapa();
+				MainGame mg = new MainGame(novo.Mapa);
 				mg.setVisible(true);
 				dispose();
 			}
