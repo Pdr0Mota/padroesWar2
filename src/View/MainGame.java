@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.sun.prism.Image;
 
+import controller.GameController;
 import model.Estado;
 import model.Regiao;
 import model.Tabuleiro;
@@ -25,11 +26,12 @@ import java.awt.Color;
 public class MainGame extends JFrame {
 
 	private JPanel contentPane;
-	
+	private GameController war = GameController.getInstance();
+	private Tabuleiro tabs = war.getJogo().Mapa;
 	/**
 	 * Create the frame.
 	 */
-	public MainGame(Tabuleiro tabs) {
+	public MainGame() {
 		
 		Mapa map = new Mapa();
 		setResizable(false);

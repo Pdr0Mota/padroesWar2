@@ -12,10 +12,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.GameController;
 import controller.War1;
 import controller.War2;
 
 public class GameSelectionScreen extends JFrame {
+	
 	
 	public GameSelectionScreen() {
 		super("War");

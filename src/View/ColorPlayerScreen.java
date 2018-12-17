@@ -82,7 +82,7 @@ public class ColorPlayerScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Jogo novo = new Jogo();
 				novo.criarMapa();
-				MainGame mg = new MainGame(novo.Mapa);
+				MainGame mg = new MainGame();
 				mg.setVisible(true);
 				dispose();
 			}
