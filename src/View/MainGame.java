@@ -22,6 +22,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class MainGame extends JFrame {
 
@@ -68,12 +73,13 @@ public class MainGame extends JFrame {
 		panel_mapa.setBounds(388, 0, 440, 497);
 		panel.add(panel_mapa);
 		
-		
 		ArrayList<Regiao> regioesAux = tabs.getRegioes();
 		ArrayList<Estado> estadosAux;
 		for(int i =0;i < regioesAux.size();i++) 
 		{
 			estadosAux=regioesAux.get(i).getEstados();
+			JLabel label = new JLabel(regioesAux.get(i).getNome());
+			panel_mapa.add(label);
 			for(int j=0;j< estadosAux.size();j++) 
 			{
 				JButton stateBtn = new JButton(estadosAux.get(j).getNome());
