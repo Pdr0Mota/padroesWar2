@@ -27,6 +27,7 @@ import javax.swing.BoxLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
 
 public class MainGame extends JFrame {
 
@@ -39,9 +40,8 @@ public class MainGame extends JFrame {
 	public MainGame() {
 		
 		Mapa map = new Mapa();
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 844, 571);
+		setBounds(100, 100, 940, 782);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -58,33 +58,36 @@ public class MainGame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(130, 140, 89, 23);
+		btnNewButton.setBounds(20, 11, 89, 23);
 		panel.add(btnNewButton);
 		
 		JButton btnMover = new JButton("Mover");
-		btnMover.setBounds(130, 174, 89, 23);
+		btnMover.setBounds(20, 41, 89, 23);
 		panel.add(btnMover);
 		
 		JButton btnEncerrar = new JButton("Encerrar");
-		btnEncerrar.setBounds(130, 208, 89, 23);
+		btnEncerrar.setBounds(20, 75, 89, 23);
 		panel.add(btnEncerrar);
 		
 		JPanel panel_mapa = new JPanel();
-		panel_mapa.setBounds(388, 0, 440, 497);
+		panel_mapa.setBounds(337, 0, 577, 698);
 		panel.add(panel_mapa);
+		
 		
 		ArrayList<Regiao> regioesAux = tabs.getRegioes();
 		ArrayList<Estado> estadosAux;
 		for(int i =0;i < regioesAux.size();i++) 
 		{
 			estadosAux=regioesAux.get(i).getEstados();
+			JPanel estadosPanel = new JPanel();
 			JLabel label = new JLabel(regioesAux.get(i).getNome());
-			panel_mapa.add(label);
+			panel_mapa.add(estadosPanel);
+			estadosPanel.add(label);
 			for(int j=0;j< estadosAux.size();j++) 
 			{
-				JButton stateBtn = new JButton(estadosAux.get(j).getNome());
 				
-				panel_mapa.add(stateBtn);
+				JButton stateBtn = new JButton(estadosAux.get(j).getNome());
+				estadosPanel.add(stateBtn);
 				
 			}
 		}
@@ -106,7 +109,7 @@ public class MainGame extends JFrame {
 				}
 			}
 		});
-		btnMapa.setBounds(130, 386, 89, 23);
+		btnMapa.setBounds(101, 230, 89, 23);
 		panel.add(btnMapa);
 		
 		
