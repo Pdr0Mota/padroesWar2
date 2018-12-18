@@ -10,22 +10,6 @@ import java.awt.BorderLayout;
 public class Mapa extends JInternalFrame {
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Mapa frame = new Mapa();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public Mapa() {
@@ -34,7 +18,7 @@ public class Mapa extends JInternalFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		java.awt.Image img = new ImageIcon(this.getClass().getResource("/Brasil1988.jpg")).getImage();
-		img = img.getScaledInstance(400, 400,  java.awt.Image.SCALE_SMOOTH);
+		img = img.getScaledInstance(650, 650,  java.awt.Image.SCALE_SMOOTH);
 		lblNewLabel.setIcon(new ImageIcon(img));
 		getContentPane().add(lblNewLabel, BorderLayout.CENTER);
 
