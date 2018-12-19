@@ -21,6 +21,12 @@ public class Jogo {
 	private ArrayList<Jogador> Jogadores = new ArrayList<Jogador>();
 	private ArrayList<Carta> Baralho = new ArrayList<Carta>();
 	private int quantidadeTrocas = 0;
+	private Jogador jogadorDoTurno;
+	private int turnos = 1;
+	
+	public Jogo() {
+		
+	}
 	
 	
 	public boolean getStatus() {
@@ -32,9 +38,15 @@ public class Jogo {
 		player.setCor(Cor);
 	}
 	
+	
+	public void addJogador(String cor) {
+		Jogador n = new Jogador(cor);
+		addJogador(n);
+	}
+	
 	public void addJogador(Jogador player) 
 	{
-		Jogadores.add(player);
+		Jogadores.add(player);		
 	}
 	
 	public ArrayList<Jogador> getJogadores()
@@ -43,10 +55,10 @@ public class Jogo {
 	}
 		
 	
-	public void criarMapa() {
+	public void criarMapa(String mapPath) {
 		
 		try {
-			Scanner scanner = new Scanner (new FileReader("map.txt"));
+			Scanner scanner = new Scanner (new FileReader(mapPath));
 			while (scanner.hasNext()) 
 			{
 				String aux = scanner.next();
@@ -117,6 +129,14 @@ public class Jogo {
 	}
 	//testes
 	    
+	public String getJogadorAtualCor() {
+		return jogadorDoTurno.getCor();
+	}
+	
+	public int getTurno() {
+		return turnos;
+	}
+	
     public void distribuirEstados(){
         int jogadorIndex;
         for (int i = 0; i < Baralho.size();i++){                
@@ -127,6 +147,8 @@ public class Jogo {
                 Jogadores.get(jogadorIndex).adicionarTerritorios();
             }
         }
+        jogadorDoTurno = Jogadores.get(Jogadores.size()-1);
+        
     }
     
     public int getNumeroJogadores(){

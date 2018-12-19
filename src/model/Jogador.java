@@ -7,6 +7,11 @@ public class Jogador {
 	private String Cor;
 	private int Exercitos_Disponiveis;
     private int quantidadeTerritorios = 0;
+        
+    public Jogador(String cor) {
+    	Mao = new ArrayList<Carta>();
+    	Cor = cor;
+    }
     
     public Jogador() 
     {

@@ -37,6 +37,13 @@ public class MainGame extends JFrame {
 	private JPanel contentPane;
 	private GameController war = GameController.getInstance();
 	private Tabuleiro tabs = war.getJogo().Mapa;
+	private JLabel cabecalho, labelDesc;
+	
+	public void updateLabelTurno() {
+		cabecalho.setText("Turno " + war.getJogo().getTurno() +": Jogador cor " + war.getJogo().getJogadorAtualCor());
+	}
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -61,8 +68,15 @@ public class MainGame extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel_1 = new JLabel("Turno x: Jogador cor y");
-		panel_1.add(lblNewLabel_1);
+		cabecalho = new JLabel();
+		cabecalho.setHorizontalAlignment(SwingConstants.CENTER);
+		updateLabelTurno();
+		panel_1.setLayout(new GridLayout(2, 1, 0, 0));
+		panel_1.add(cabecalho);
+		
+		labelDesc = new JLabel("Rodada Inicial");
+		labelDesc.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(labelDesc);
 		
 		JPanel westPainel = new JPanel();
 		contentPane.add(westPainel, BorderLayout.WEST);
@@ -81,11 +95,6 @@ public class MainGame extends JFrame {
 		
 		JButton btnMapa = new JButton("Mapa");
 		westPainel.add(btnMapa);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		westPainel.add(lblNewLabel);
-		lblNewLabel.setOpaque(true);
-		lblNewLabel.setBackground(Color.blue);
 		
 		JPanel panel_mapa = new JPanel();
 		contentPane.add(panel_mapa, BorderLayout.CENTER);
@@ -131,12 +140,11 @@ public class MainGame extends JFrame {
 				JPanel jp = new JPanel();
 				JButton b = new JButton(estadosAux.get(j).getNome());
 				jp.add(b);
-				
 				JLabel corPlayer = new JLabel("        ");
 				corPlayer.setOpaque(true);
-				corPlayer.setBackground(Color.MAGENTA);
+				setLabelBackground(corPlayer, estadosAux.get(j).getDominante().getCor());
 				jp.add(corPlayer);
-				jp.add(new JLabel("Tropas: 100"));
+				jp.add(new JLabel("1"));
 				btnRegioesPanel[i].add(jp);
 			}
 		}
@@ -181,6 +189,20 @@ public class MainGame extends JFrame {
 		
 		
 		
+	}
+	
+	public void setLabelBackground(JLabel l, String cor) {
+		if (cor.equalsIgnoreCase("Verde")) {
+			l.setBackground(Color.GREEN);
+		} else if (cor.equalsIgnoreCase("Azul")) {
+			l.setBackground(Color.BLUE);
+		} else if (cor.equalsIgnoreCase("Preto")) {
+			l.setBackground(Color.BLACK);
+		} else if (cor.equalsIgnoreCase("Vermelho")) {
+			l.setBackground(Color.RED);
+		} else {
+			l.setBackground(Color.YELLOW);
+		}	
 	}
 	
 	

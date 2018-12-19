@@ -3,15 +3,11 @@ package controller;
 public final class GameController {
 	
 	private static final GameController INSTANCE = new GameController();
-	private War1 warI;
-	private War2 warII;
+	private int version;
 	private Jogo jogo;
 	
-	private GameController() 
-	{
-		//TODO
-		jogo = new Jogo();
-		jogo.criarMapa();
+	private GameController() {
+		
 	}
 	
 	public static GameController getInstance() 
@@ -23,4 +19,27 @@ public final class GameController {
 	{
 		return jogo;
 	}
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void newGame(String mapPath) {
+		// TODO Auto-generated method stub
+		jogo = new Jogo();	
+		jogo.criarMapa(mapPath);
+	}
+	
+	public void setJogadores(String[] cores) {
+		for (int i = 0; i < cores.length;i++) {
+			jogo.addJogador(cores[i]);
+		}
+	}
+	
+	
+	
+	public void iniciarJogo() throws Exception {
+		jogo.rodadaInicial();
+	}
+	
 }

@@ -13,11 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.GameController;
-import controller.War1;
-import controller.War2;
 
 public class GameSelectionScreen extends JFrame {
 	
+	private GameController war = GameController.getInstance();
 	
 	public GameSelectionScreen() {
 		super("War");
@@ -54,6 +53,7 @@ public class GameSelectionScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
+				war.newGame("mapWar2.txt");
 				PlayerNumberSelection w2 = new PlayerNumberSelection();
 				w2.setVisible(true);
 				dispose();			
@@ -64,6 +64,7 @@ public class GameSelectionScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
+				war.newGame("mapWar1.txt");
 				PlayerNumberSelection w1 = new PlayerNumberSelection();
 				w1.setVisible(true);
 				dispose();
