@@ -23,6 +23,27 @@ public class CombateController {
 		}
 	}	
 	
+	public boolean ataqueTerrestre(Jogador jogador, Estado ataque, Estado defesa) {
+		boolean podeAtacar = true;
+		if (!(ataque.getDominante().equals(jogador)) || defesa.getDominante().equals(jogador)) {				
+			System.out.println("Opcao de estado de origem ou destino invalidas.");			
+			podeAtacar = false;
+		} else if (!(ataque.fazFronteiraCom(defesa.getNome()))) {
+			System.out.println("Estados devem fazer fronteira!");			
+			podeAtacar = false;
+		} else if (ataque.getQuantidade_de_Tropas() == 1) {
+			System.out.println("Eh necessario mais tropas para atacar!");
+			podeAtacar = false;
+		}			
+		
+		if (!podeAtacar)
+			return false;
+		else {
+			return true;
+		}
+	}
+	
+	
 	public void combate(Jogador jogador, Tabuleiro mapa, Estado origem, Estado destino) {
 		boolean ret = false;
 		boolean podeAtacar = true;

@@ -350,6 +350,12 @@ public class Jogo {
 		}
 	}
 	
+	public boolean atacar(Estado ataque, Estado defesa) {		
+		boolean ret = Combate.ataqueTerrestre(jogadorDoTurno, ataque, defesa);
+		return ret;
+	}
+	
+	
 	public void condicaoGanho() {		
 		Jogador ganhador = Mapa.getRegioes().get(0).getDomintante();
 		if(ganhador == null) {
@@ -475,6 +481,10 @@ public class Jogo {
 	
 	public void setAcaoTurno(int i) {
 		acaoTurno = i;
+	}
+	
+	public void acaoEncerrar() {
+		proximoJogador();
 	}
 	
 	public boolean inserirTropa(Estado destino) {

@@ -43,6 +43,9 @@ public class MainGame extends JFrame {
 	public int btnPressed=0;
 	private boolean moved =false;
 	private boolean attacked=false;
+	private ArrayList<Estado> pacote = new ArrayList<Estado>();
+	private ArrayList<JLabel> referenciaDados = new ArrayList<JLabel>();
+	
 	
 	public void updateLabelTurno() {
 		cabecalho.setText("Turno " + war.getJogo().getRodada() +": Jogador cor " + war.getJogo().getJogadorAtualCor());
@@ -96,6 +99,12 @@ public class MainGame extends JFrame {
 		westPainel.add(btnMover);
 		
 		JButton btnEncerrar = new JButton("Encerrar");
+		btnEncerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (war.getJogo().getAcaoTurno() == 0)
+					war.getJogo().acaoEncerrar();
+			}
+		});
 		westPainel.add(btnEncerrar);
 				
 		JButton btnMapa = new JButton("Mapa");
@@ -182,11 +191,21 @@ public class MainGame extends JFrame {
 									war.getJogo().setAcaoTurno(0);
 								}
 							} else {
-								JOptionPane.showMessageDialog(null, "Este estado não te percente DEMONHO");
+								JOptionPane.showMessageDialog(null, "Este estado nao eh seu, ladron!");
 							}
 							
 						} else if(war.getJogo().getAcaoTurno() == 2) {
 							//atacar
+							pacote.add(aux);
+							referenciaDados.add(corPlayer);
+							referenciaDados.add(tropasLabel);
+							if (pacote.size() == 2) {
+								boolean c = war.getJogo().atacar(pacote.get(0), pacote.get(1));
+								if (c)
+									JOptionPane.showMessageDialog(null, "atacou!");
+								else 
+									JOptionPane.showMessageDialog(null, "atacou nao");
+							}
 							
 						} else if(war.getJogo().getAcaoTurno() == 3) {
 							// mover
@@ -195,25 +214,7 @@ public class MainGame extends JFrame {
 						} else if (war.getJogo().getAcaoTurno() == 0) {
 							JOptionPane.showMessageDialog(null, "Escolha uma ação antes");
 						}
-						
-						
-						
-						
-//						if(MainGame.this.btnPressed==0) 
-//						{
-//							aux = new Estado(b.getText());
-//							MainGame.this.setOrigem(aux);
-//							MainGame.this.btnPressed = 1;
-//							System.out.println("Origem: "+ Origem.getNome());
-//						}
-//						else if(MainGame.this.btnPressed==1) 
-//						{
-//							aux = new Estado(b.getText());
-//							MainGame.this.setDestino(aux);
-//							MainGame.this.btnPressed =0;
-//							System.out.println("Destino: " + Destino.getNome());
-//						}
-						
+												
 					}
 				});
 				
@@ -246,12 +247,16 @@ public class MainGame extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
+				if (war.getJogo().getAcaoTurno() == 0)
+					war.getJogo().acaoMover();
+
 			}
 		});
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (war.getJogo().getAcaoTurno() == 0)
+					war.getJogo().acaoAtacar();
 			}
 		});
 		
