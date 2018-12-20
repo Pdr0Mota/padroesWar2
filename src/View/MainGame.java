@@ -192,7 +192,11 @@ public class MainGame extends JFrame {
 							// mover
 							
 							
+						} else if (war.getJogo().getAcaoTurno() == 0) {
+							JOptionPane.showMessageDialog(null, "Escolha uma ação antes");
 						}
+						
+						
 						
 						
 //						if(MainGame.this.btnPressed==0) 

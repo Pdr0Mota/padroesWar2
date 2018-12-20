@@ -38,7 +38,7 @@ public final class GameController {
 	
 	public void setJogadores(String[] cores) {
 		for (int i = 0; i < cores.length;i++) {
-			jogo.addJogador(cores[i], (i+1));
+			jogo.addJogador(cores[i], (i+2));
 		}
 	}
 	

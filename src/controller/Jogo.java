@@ -162,9 +162,18 @@ public class Jogo {
             }
         }        
         acaoTurno = 4;
-        jogadorDoTurno = Jogadores.get(Jogadores.size()-1);
-        int tropas = ((int)Math.ceil(jogadorDoTurno.getQuantidadeTerritorios()/2.0)) + tropasRegioes(jogadorDoTurno);
-        jogadorDoTurno.setExercitos_Disponiveis(tropas);
+        Jogadores.add(0,Jogadores.get(Jogadores.size()-1));
+        Jogadores.get(0).setId(1);
+        Jogadores.remove(Jogadores.size()-1);        
+        inicioDeTurnoJogador(Jogadores.get(0));
+    }
+    
+    
+    //Seta jogador do turno
+    public void inicioDeTurnoJogador(Jogador j) {
+    	jogadorDoTurno = j;
+    	int tropas = ((int)Math.ceil(jogadorDoTurno.getQuantidadeTerritorios()/2.0)) + tropasRegioes(jogadorDoTurno);
+    	jogadorDoTurno.setExercitos_Disponiveis(tropas);    	       	
     }
     
     public int getNumeroJogadores(){
@@ -449,17 +458,23 @@ public class Jogo {
 	}
 	
 	public void proximoJogador() {
-		if (jogadorDoTurno.getId() == Jogadores.size()) {
-			jogadorDoTurno = Jogadores.get(0);
+		if (rodada > 1) {
+			acaoTurno = 0;
+		}	
+		if (jogadorDoTurno.getId() == Jogadores.size()) {			
+			System.out.println("ALOW2");
+			rodada++;
+			inicioDeTurnoJogador(Jogadores.get(0));
+			acaoTurno = 0;
+			
 		} else {
-			jogadorDoTurno = Jogadores.get(jogadorDoTurno.getId()); // passa para o proximo jogador já que o ID começa em 1 e a posição começa em 0
+			inicioDeTurnoJogador(Jogadores.get(jogadorDoTurno.getId())); // passa para o proximo jogador já que o ID começa em 1 e a posição começa em 0
 		}		
-		jogadorDoTurno.setExercitos_Disponiveis(((int)Math.ceil(jogadorDoTurno.getQuantidadeTerritorios()/2.0)) + tropasRegioes(jogadorDoTurno)); 
+		 
 	}
 	
 	
 	public boolean inserirTropa(Estado destino) {
-		System.out.println("Chegou aqui: " + destino.getNome());
 		if (destino.getDominante().equals(jogadorDoTurno)) {
 			int tropas = jogadorDoTurno.getExercitos_Disponiveis();
 			destino.addTropas(1);
