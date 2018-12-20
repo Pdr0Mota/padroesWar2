@@ -179,7 +179,7 @@ public class MainGame extends JFrame {
 //								int aux = tropasLabel.getText() + 1;
 								tropasLabel.setText(String.valueOf((Integer.parseInt(tropasLabel.getText()) + 1)));
 								if (war.getJogo().getJogadorTurno().getExercitos_Disponiveis() == 0) {
-									
+									war.getJogo().setAcaoTurno(0);
 								}
 							} else {
 								JOptionPane.showMessageDialog(null, "Este estado não te percente DEMONHO");

@@ -459,13 +459,13 @@ public class Jogo {
 	
 	public void proximoJogador() {
 		if (rodada > 1) {
-			acaoTurno = 0;
+			acaoTurno = 1;
 		}	
 		if (jogadorDoTurno.getId() == Jogadores.size()) {			
 			System.out.println("ALOW2");
 			rodada++;
 			inicioDeTurnoJogador(Jogadores.get(0));
-			acaoTurno = 0;
+			acaoTurno = 1;
 			
 		} else {
 			inicioDeTurnoJogador(Jogadores.get(jogadorDoTurno.getId())); // passa para o proximo jogador já que o ID começa em 1 e a posição começa em 0
@@ -473,6 +473,9 @@ public class Jogo {
 		 
 	}
 	
+	public void setAcaoTurno(int i) {
+		acaoTurno = i;
+	}
 	
 	public boolean inserirTropa(Estado destino) {
 		if (destino.getDominante().equals(jogadorDoTurno)) {
