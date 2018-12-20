@@ -23,11 +23,14 @@ public final class GameController {
 	public int getVersion() {
 		return version;
 	}
+	public void setVersion(int version) 
+	{
+		this.version = version;
+	}
 
 	public void newGame(String mapPath) {
 		// TODO Auto-generated method stub
-		jogo = new Jogo();	
-		jogo.criarMapa(mapPath);
+		jogo = new Jogo(mapPath, version);	
 	}
 	
 	public void setJogadores(String[] cores) {

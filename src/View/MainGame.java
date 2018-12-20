@@ -38,6 +38,11 @@ public class MainGame extends JFrame {
 	private GameController war = GameController.getInstance();
 	private Tabuleiro tabs = war.getJogo().Mapa;
 	private JLabel cabecalho, labelDesc;
+	private Estado Origem;
+	private Estado Destino;
+	public int btnPressed=0;
+	private boolean moved =false;
+	private boolean attacked=false;
 	
 	public void updateLabelTurno() {
 		cabecalho.setText("Turno " + war.getJogo().getTurno() +": Jogador cor " + war.getJogo().getJogadorAtualCor());
@@ -140,6 +145,27 @@ public class MainGame extends JFrame {
 				JPanel jp = new JPanel();
 				JButton b = new JButton(estadosAux.get(j).getNome());
 				jp.add(b);
+				b.addActionListener(new ActionListener() {
+					Estado aux;
+					public void actionPerformed(ActionEvent arg0) {
+						if(MainGame.this.btnPressed==0) 
+						{
+							aux = new Estado(b.getText());
+							MainGame.this.setOrigem(aux);
+							MainGame.this.btnPressed = 1;
+							System.out.println("Origem: "+ Origem.getNome());
+						}
+						else if(MainGame.this.btnPressed==1) 
+						{
+							aux = new Estado(b.getText());
+							MainGame.this.setDestino(aux);
+							MainGame.this.btnPressed =0;
+							System.out.println("Destino: " + Destino.getNome());
+						}
+						
+						
+					}
+				});
 				JLabel corPlayer = new JLabel("        ");
 				corPlayer.setOpaque(true);
 				setLabelBackground(corPlayer, estadosAux.get(j).getDominante().getCor());
@@ -168,6 +194,16 @@ public class MainGame extends JFrame {
 				}
 			}
 		});
+		
+		
+		btnMover.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				
+			}
+		});
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -203,6 +239,46 @@ public class MainGame extends JFrame {
 		} else {
 			l.setBackground(Color.YELLOW);
 		}	
+	}
+
+
+	public Estado getOrigem() {
+		return Origem;
+	}
+
+
+	public void setOrigem(Estado origem) {
+		Origem = origem;
+	}
+
+
+	public Estado getDestino() {
+		return Destino;
+	}
+
+
+	public void setDestino(Estado destino) {
+		Destino = destino;
+	}
+
+
+	public boolean isMoved() {
+		return moved;
+	}
+
+
+	public void setMoved(boolean moveu) {
+		this.moved = moveu;
+	}
+
+
+	public boolean isAttacked() {
+		return attacked;
+	}
+
+
+	public void setAttacked(boolean attacked) {
+		this.attacked = attacked;
 	}
 	
 	

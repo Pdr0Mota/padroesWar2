@@ -106,7 +106,7 @@ public class ColorPlayerScreen extends JFrame {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				war.setJogadores(getCoresFromComboBox(comboBoxCores));
-				war.getJogo().initBaralho();
+				//war.getJogo().initBaralho();
 				war.getJogo().distribuirEstados();
 				MainGame mg = new MainGame();
 				mg.setVisible(true);

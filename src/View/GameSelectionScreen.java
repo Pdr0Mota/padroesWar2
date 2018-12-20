@@ -53,6 +53,7 @@ public class GameSelectionScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
+				war.setVersion(2);
 				war.newGame("mapWar2.txt");
 				PlayerNumberSelection w2 = new PlayerNumberSelection();
 				w2.setVisible(true);
@@ -64,6 +65,7 @@ public class GameSelectionScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
+				war.setVersion(1);
 				war.newGame("mapWar1.txt");
 				PlayerNumberSelection w1 = new PlayerNumberSelection();
 				w1.setVisible(true);

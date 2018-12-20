@@ -17,15 +17,19 @@ public class Jogo {
 	public Tabuleiro Mapa= new Tabuleiro();
 	private boolean Status = true;
 	private MoveController Mover = new MoveController(Mapa);
-	private CombateController Combate = new CombateController();
+	private CombateController Combate;
+	private CombateFactory UFC;
 	private ArrayList<Jogador> Jogadores = new ArrayList<Jogador>();
 	private ArrayList<Carta> Baralho = new ArrayList<Carta>();
 	private int quantidadeTrocas = 0;
 	private Jogador jogadorDoTurno;
 	private int turnos = 1;
 	
-	public Jogo() {
-		
+	public Jogo(String mapPath, int version) {
+		this.criarMapa(mapPath);
+		UFC = new CombateFactory(version);
+		Combate = UFC.getControl();
+		this.initBaralho();
 	}
 	
 	
@@ -55,7 +59,7 @@ public class Jogo {
 	}
 		
 	
-	public void criarMapa(String mapPath) {
+	private void criarMapa(String mapPath) {
 		
 		try {
 			Scanner scanner = new Scanner (new FileReader(mapPath));
@@ -77,7 +81,7 @@ public class Jogo {
 					Reg.addEstados(Est);
 				}
 				Mapa.addRegiao(Reg);
-			//	scanner.close();
+				//scanner.close();
 			}
 			/*for(int regs=0;regs<Mapa.getRegioes().size();regs++) 
 			{
@@ -121,10 +125,10 @@ public class Jogo {
 		}
 		//parte que adiciona os coringas
 		
-		/*for (int i=0;i<6;i++) 
+		for (int i=0;i<6;i++) 
 		{
 			Baralho.add(new Coringa());
-		}*/
+		}
 		Collections.shuffle(Baralho);
 	}
 	//testes
