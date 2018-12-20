@@ -7,10 +7,16 @@ public class Jogador {
 	private String Cor;
 	private int Exercitos_Disponiveis;
     private int quantidadeTerritorios = 0;
+    private int id;
         
-    public Jogador(String cor) {
+    public Jogador(String cor, int id) {
     	Mao = new ArrayList<Carta>();
     	Cor = cor;
+    	this.id = id;
+    }
+    
+    public int getId() {
+    	return id;
     }
     
     public Jogador() 

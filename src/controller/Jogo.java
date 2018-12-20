@@ -23,7 +23,12 @@ public class Jogo {
 	private ArrayList<Carta> Baralho = new ArrayList<Carta>();
 	private int quantidadeTrocas = 0;
 	private Jogador jogadorDoTurno;
-	private int turnos = 1;
+	private int rodada = 1;
+	private int acaoTurno; // 0 = nao iniciou nenhuma; 1 = distribuir tropas; 2 = atacar; 3 = mover; 4 = rodada inicial
+	
+	public Jogador getJogadorTurno() {
+		return jogadorDoTurno;
+	}
 	
 	public Jogo(String mapPath, int version) {
 		this.criarMapa(mapPath);
@@ -32,6 +37,9 @@ public class Jogo {
 		this.initBaralho();
 	}
 	
+	public int getAcaoTurno() {
+		return acaoTurno;
+	}
 	
 	public boolean getStatus() {
 		return Status;
@@ -43,8 +51,8 @@ public class Jogo {
 	}
 	
 	
-	public void addJogador(String cor) {
-		Jogador n = new Jogador(cor);
+	public void addJogador(String cor, int id) {
+		Jogador n = new Jogador(cor, id);
 		addJogador(n);
 	}
 	
@@ -137,10 +145,12 @@ public class Jogo {
 		return jogadorDoTurno.getCor();
 	}
 	
-	public int getTurno() {
-		return turnos;
+	public int getRodada() {
+		return rodada;
 	}
 	
+	
+//	Distribui estados entre jogadores e seta como turno do ultimo jogador
     public void distribuirEstados(){
         int jogadorIndex;
         for (int i = 0; i < Baralho.size();i++){                
@@ -150,9 +160,11 @@ public class Jogo {
                 ((CartaEstado)Baralho.get(i)).getEstado().setQuantidade_de_Tropas(1);
                 Jogadores.get(jogadorIndex).adicionarTerritorios();
             }
-        }
+        }        
+        acaoTurno = 4;
         jogadorDoTurno = Jogadores.get(Jogadores.size()-1);
-        
+        int tropas = ((int)Math.ceil(jogadorDoTurno.getQuantidadeTerritorios()/2.0)) + tropasRegioes(jogadorDoTurno);
+        jogadorDoTurno.setExercitos_Disponiveis(tropas);
     }
     
     public int getNumeroJogadores(){
@@ -420,10 +432,48 @@ public class Jogo {
 		}
 	}
 	
+	
+	
+	public void acaoDistribuir() {
+		acaoTurno = 1;
+			
+	}
+	
+	public void acaoAtacar() {
+		acaoTurno = 2;
+		
+	}
+	
+	public void acaoMover() {
+		acaoTurno = 3;
+	}
+	
+	public void proximoJogador() {
+		if (jogadorDoTurno.getId() == Jogadores.size()) {
+			jogadorDoTurno = Jogadores.get(0);
+		} else {
+			jogadorDoTurno = Jogadores.get(jogadorDoTurno.getId()); // passa para o proximo jogador já que o ID começa em 1 e a posição começa em 0
+		}		
+		jogadorDoTurno.setExercitos_Disponiveis(((int)Math.ceil(jogadorDoTurno.getQuantidadeTerritorios()/2.0)) + tropasRegioes(jogadorDoTurno)); 
+	}
+	
+	
+	public boolean inserirTropa(Estado destino) {
+		System.out.println("Chegou aqui: " + destino.getNome());
+		if (destino.getDominante().equals(jogadorDoTurno)) {
+			int tropas = jogadorDoTurno.getExercitos_Disponiveis();
+			destino.addTropas(1);
+			jogadorDoTurno.setExercitos_Disponiveis(tropas-1);
+			return true;
+		}			
+		return false;
+	}	
+	
+	
 	public void inicioDeTurno(Jogador jogador, int tropasExtras) throws Exception {
 		Scanner scan = new Scanner(System.in);
 		int tropasDisponiveis;		
-		boolean check = false;		
+		boolean check = false;	// mantem no laço até entrar com um dado válido	
 		String Escolhas[];
 		Object n[];		
 //		Checando entradas

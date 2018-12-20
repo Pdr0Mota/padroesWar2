@@ -1,11 +1,13 @@
 package controller;
 
+import model.Estado;
+
 public final class GameController {
 	
 	private static final GameController INSTANCE = new GameController();
 	private int version;
 	private Jogo jogo;
-	
+		
 	private GameController() {
 		
 	}
@@ -23,11 +25,12 @@ public final class GameController {
 	public int getVersion() {
 		return version;
 	}
+	
 	public void setVersion(int version) 
 	{
 		this.version = version;
 	}
-
+	
 	public void newGame(String mapPath) {
 		// TODO Auto-generated method stub
 		jogo = new Jogo(mapPath, version);	
@@ -35,7 +38,7 @@ public final class GameController {
 	
 	public void setJogadores(String[] cores) {
 		for (int i = 0; i < cores.length;i++) {
-			jogo.addJogador(cores[i]);
+			jogo.addJogador(cores[i], (i+1));
 		}
 	}
 	

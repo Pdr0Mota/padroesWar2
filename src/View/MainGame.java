@@ -17,6 +17,7 @@ import model.Tabuleiro;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -32,8 +33,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
-public class MainGame extends JFrame {
-
+public class MainGame extends JFrame {	
 	private JPanel contentPane;
 	private GameController war = GameController.getInstance();
 	private Tabuleiro tabs = war.getJogo().Mapa;
@@ -45,7 +45,11 @@ public class MainGame extends JFrame {
 	private boolean attacked=false;
 	
 	public void updateLabelTurno() {
-		cabecalho.setText("Turno " + war.getJogo().getTurno() +": Jogador cor " + war.getJogo().getJogadorAtualCor());
+		cabecalho.setText("Turno " + war.getJogo().getRodada() +": Jogador cor " + war.getJogo().getJogadorAtualCor());
+	}
+	
+	public void updateLabelDesc(int n, String cor) {
+		labelDesc.setText("Rodada - Jogador " + cor + ": " +  n + " tropas.");
 	}
 	
 	
@@ -68,8 +72,6 @@ public class MainGame extends JFrame {
 		ArrayList<Regiao> regioesAux = tabs.getRegioes();
 		ArrayList<Estado> estadosAux;
 		
-		
-		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
 		
@@ -79,7 +81,7 @@ public class MainGame extends JFrame {
 		panel_1.setLayout(new GridLayout(2, 1, 0, 0));
 		panel_1.add(cabecalho);
 		
-		labelDesc = new JLabel("Rodada Inicial");
+		labelDesc = new JLabel("Rodada Inicial - Jogador " + war.getJogo().getJogadorAtualCor() + ": " +  war.getJogo().getJogadorTurno().getExercitos_Disponiveis() + " tropas.");
 		labelDesc.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(labelDesc);
 		
@@ -95,9 +97,7 @@ public class MainGame extends JFrame {
 		
 		JButton btnEncerrar = new JButton("Encerrar");
 		westPainel.add(btnEncerrar);
-		
-		
-		
+				
 		JButton btnMapa = new JButton("Mapa");
 		westPainel.add(btnMapa);
 		
@@ -142,38 +142,80 @@ public class MainGame extends JFrame {
 			btnRegioesPanel[i].setLayout(new GridLayout(15,1));
 			painelEstados.add(btnRegioesPanel[i]); 			
 			for (int j = 0; j < estadosAux.size();j++) {
+				Estado aux = estadosAux.get(j);
 				JPanel jp = new JPanel();
 				JButton b = new JButton(estadosAux.get(j).getNome());
 				jp.add(b);
-				b.addActionListener(new ActionListener() {
-					Estado aux;
-					public void actionPerformed(ActionEvent arg0) {
-						if(MainGame.this.btnPressed==0) 
-						{
-							aux = new Estado(b.getText());
-							MainGame.this.setOrigem(aux);
-							MainGame.this.btnPressed = 1;
-							System.out.println("Origem: "+ Origem.getNome());
-						}
-						else if(MainGame.this.btnPressed==1) 
-						{
-							aux = new Estado(b.getText());
-							MainGame.this.setDestino(aux);
-							MainGame.this.btnPressed =0;
-							System.out.println("Destino: " + Destino.getNome());
-						}
-						
-						
-					}
-				});
 				JLabel corPlayer = new JLabel("        ");
 				corPlayer.setOpaque(true);
 				setLabelBackground(corPlayer, estadosAux.get(j).getDominante().getCor());
 				jp.add(corPlayer);
-				jp.add(new JLabel("1"));
+				JLabel tropasLabel = new JLabel("1");
+				jp.add(tropasLabel);
 				btnRegioesPanel[i].add(jp);
+				b.addActionListener(new ActionListener() {
+//					Estado aux;
+					public void actionPerformed(ActionEvent arg0) {
+						System.out.println(b.getText() + " - " + corPlayer.getText() + " - " + tropasLabel.getText());						
+						if (war.getJogo().getAcaoTurno() == 4) {
+							//rodada inicial
+							if (war.getJogo().inserirTropa(aux) == true) {
+								updateLabelDesc(war.getJogo().getJogadorTurno().getExercitos_Disponiveis(), war.getJogo().getJogadorAtualCor());
+//								int aux = tropasLabel.getText() + 1;
+								tropasLabel.setText(String.valueOf((Integer.parseInt(tropasLabel.getText()) + 1)));
+								if (war.getJogo().getJogadorTurno().getExercitos_Disponiveis() == 0) {
+									war.getJogo().proximoJogador();
+									updateLabelTurno();
+									updateLabelDesc(war.getJogo().getJogadorTurno().getExercitos_Disponiveis(), war.getJogo().getJogadorAtualCor());
+								}
+							} else {
+								JOptionPane.showMessageDialog(null, "Este estado não te percente DEMONHO");
+							}
+						}
+						else if (war.getJogo().getAcaoTurno() == 1) {
+							// Inserir tropas
+							if (war.getJogo().inserirTropa(aux) == true) {
+								updateLabelDesc(war.getJogo().getJogadorTurno().getExercitos_Disponiveis(), war.getJogo().getJogadorAtualCor());
+//								int aux = tropasLabel.getText() + 1;
+								tropasLabel.setText(String.valueOf((Integer.parseInt(tropasLabel.getText()) + 1)));
+								if (war.getJogo().getJogadorTurno().getExercitos_Disponiveis() == 0) {
+									
+								}
+							} else {
+								JOptionPane.showMessageDialog(null, "Este estado não te percente DEMONHO");
+							}
+							
+						} else if(war.getJogo().getAcaoTurno() == 2) {
+							//atacar
+							
+						} else if(war.getJogo().getAcaoTurno() == 3) {
+							// mover
+							
+							
+						}
+						
+						
+//						if(MainGame.this.btnPressed==0) 
+//						{
+//							aux = new Estado(b.getText());
+//							MainGame.this.setOrigem(aux);
+//							MainGame.this.btnPressed = 1;
+//							System.out.println("Origem: "+ Origem.getNome());
+//						}
+//						else if(MainGame.this.btnPressed==1) 
+//						{
+//							aux = new Estado(b.getText());
+//							MainGame.this.setDestino(aux);
+//							MainGame.this.btnPressed =0;
+//							System.out.println("Destino: " + Destino.getNome());
+//						}
+						
+					}
+				});
+				
 			}
 		}
+		
 		
 		
 		btnMapa.addActionListener(new ActionListener() {
@@ -222,8 +264,6 @@ public class MainGame extends JFrame {
 //			}
 //			
 //		}
-		
-		
 		
 	}
 	
